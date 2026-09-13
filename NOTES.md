@@ -5,10 +5,10 @@ session can pick up without re-deriving anything.
 
 ## Status (2026-09-13)
 
-- Built, tested, **not committed** — `env-sync/` is untracked in
-  `TheMusicDev/monorepo-conventions` (private).
+- Extracted to this repo (`TheMusicDev/env-sync`, private) via
+  `git filter-repo --subdirectory-filter` — history of the 3 env-sync commits
+  preserved from the conventions repo.
 - `bun test` 8 pass · `tsc --noEmit` clean · CLI smoke-tested (create → write → check).
-- Lives in the conventions repo for now; extract to own repo later (see below).
 
 ## Decisions made
 
@@ -57,11 +57,16 @@ Option B — copy dir into fresh repo, first commit = start. Fine; tool is small
 
 (`git mv` itself is only for renames inside the same repo — irrelevant here.)
 
+## Extraction plan — DONE (kept for reference)
+
+Was in `TheMusicDev/monorepo-conventions` under `env-sync/`; carved out with
+`git clone --no-hardlinks` + `git filter-repo --subdirectory-filter env-sync`,
+remote repointed, pushed. `git mv` itself only renames inside one repo.
+
 ## Starter wiring — TODO
 
-- [ ] Commit env-sync as a chunk in monorepo-conventions.
 - [ ] Add `env:check` / `env:sync` root scripts to `monorepo-starter/` +
-      dep on `github:TheMusicDev/env-sync` once extracted.
+      dep on `github:TheMusicDev/env-sync` (now real).
 - [ ] turbo.json: add `.env` to `globalEnv` (or task `env` keys) — otherwise
       every sync silently poisons turbo's task-cache keys.
 - [ ] New convention concept in `monorepo-conventions/` (e.g. `env/env-sync.md`)
