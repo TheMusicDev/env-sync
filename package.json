@@ -3,6 +3,27 @@
     "version": "0.1.0",
     "description": "Sync a monorepo root .env into per-app .env files declared by .env.example mapping headers",
     "type": "module",
+    "license": "MIT",
+    "author": "Angel S. Moreno",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TheMusicDev/env-sync.git"
+    },
+    "bugs": "https://github.com/TheMusicDev/env-sync/issues",
+    "homepage": "https://github.com/TheMusicDev/env-sync#readme",
+    "keywords": [
+        "env",
+        "dotenv",
+        "monorepo",
+        "turborepo",
+        "bun",
+        "cli"
+    ],
+    "files": [
+        "src",
+        "README.md",
+        "LICENSE"
+    ],
     "packageManager": "bun@1.3.14",
     "bin": {
         "env-sync": "src/index.ts"

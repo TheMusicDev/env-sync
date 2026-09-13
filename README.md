@@ -36,10 +36,9 @@ Run from the monorepo root. Root files live at `./.env` and `./.env.example`.
 ## Install
 
 ```sh
-bun link                    # from this dir (local dev)
-bun link @themusicdev/env-sync   # in the consuming repo
-# or
-bun add github:TheMusicDev/monorepo-conventions   # once extracted to its own repo
+bun add github:TheMusicDev/env-sync   # from GitHub
+bun add @themusicdev/env-sync         # from npm (once published)
+bun link @themusicdev/env-sync        # local dev, after `bun link` in this dir
 ```
 
 Typical root scripts in the consuming repo:
@@ -55,3 +54,7 @@ Typical root scripts in the consuming repo:
 
 Turbo hashes env files into cache keys — add `.env` to `globalEnv` (or task
 `env` keys) in `turbo.json`, or every sync silently poisons cache correctness.
+
+## License
+
+[MIT](LICENSE) — contributions welcome, see [CONTRIBUTING.md](CONTRIBUTING.md).
