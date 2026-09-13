@@ -1,0 +1,21 @@
+{
+    "name": "@themusicdev/env-sync",
+    "version": "0.1.0",
+    "description": "Sync a monorepo root .env into per-app .env files declared by .env.example mapping headers",
+    "type": "module",
+    "packageManager": "bun@1.3.14",
+    "bin": {
+        "env-sync": "src/index.ts"
+    },
+    "scripts": {
+        "check:types": "tsc --noEmit",
+        "test": "bun test"
+    },
+    "dependencies": {
+        "citty": "^0.1.6"
+    },
+    "devDependencies": {
+        "@types/bun": "^1.3.14",
+        "typescript": "^7.0.2"
+    }
+}
