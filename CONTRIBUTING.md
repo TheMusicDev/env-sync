@@ -28,4 +28,13 @@ the `dist/` bundle built for Node. Dev-run without building:
 
 ## Releasing
 
-Maintainer bumps version, tags, `npm publish`.
+Automated via [release-please](https://github.com/googleapis/release-please):
+
+1. Merge conventional commits to `main` (commit types drive the version bump:
+   `feat:` → minor, `fix:` → patch, `feat!:` / `BREAKING CHANGE:` → major).
+2. release-please opens/updates a Release PR with the version bump + generated
+   `CHANGELOG.md`.
+3. Merging that PR tags the repo, creates the GitHub Release, and the
+   `publish` workflow publishes to npm with provenance.
+
+One-time maintainer setup: `NPM_TOKEN` (automation token) as a repo secret.
