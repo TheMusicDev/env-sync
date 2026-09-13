@@ -36,9 +36,12 @@ session can pick up without re-deriving anything.
 1. **Now (this machine)**: `bun link` in this dir, then
    `bun link @themusicdev/env-sync` in any project.
 2. **Next repo**: `bun add file:../mono-repo-skill/env-sync`.
-3. **Real**: extract to `TheMusicDev/env-sync` →
-   `bun add github:TheMusicDev/env-sync`. npm publish later → plain
-   `bun add @themusicdev/env-sync`. Root scripts never change:
+3. **Real (DONE — this repo)**:
+   `bun add git+ssh://git@github.com/TheMusicDev/env-sync.git`.
+   ⚠️ Private repo gotcha: the `github:TheMusicDev/env-sync` shorthand 404s —
+   bun fetches its tarball via the unauthenticated GitHub API. Use the SSH git
+   URL. npm publish later → plain `bun add @themusicdev/env-sync`. Root
+   scripts never change:
    ```json
    { "env:check": "env-sync check", "env:sync": "env-sync write" }
    ```
