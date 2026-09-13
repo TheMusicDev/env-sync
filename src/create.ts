@@ -1,4 +1,5 @@
 import { existsSync } from 'node:fs'
+import { writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { findExamples, relPath } from './lib'
 
@@ -46,7 +47,7 @@ export async function create(root: string): Promise<CreateResult> {
             skipped.push(`${label} already exists at ${p} — left untouched`)
             continue
         }
-        await Bun.write(p, content)
+        await writeFile(p, content, 'utf8')
         created.push(p)
     }
 

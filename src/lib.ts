@@ -1,5 +1,6 @@
 // ponytail: hand-rolled parsers — .env format is tiny, not worth a dependency
-import { readdir } from 'node:fs/promises'
+import { existsSync } from 'node:fs'
+import { readFile, readdir } from 'node:fs/promises'
 import { isAbsolute, join, relative, sep } from 'node:path'
 
 export const MAPPING_MARKER = '# .env.mapping'
@@ -83,7 +84,7 @@ export async function findExamples(root: string): Promise<ExampleFile[]> {
         if (dir === root) continue // root's own aggregate example
         if (relative(root, dir).split(sep).some((s) => SKIP_DIRS.has(s))) continue
         const path = join(dir, e.name)
-        const text = await Bun.file(path).text()
+        const text = await readFile(path, 'utf8')
         out.push({
             dir,
             path,
@@ -96,9 +97,8 @@ export async function findExamples(root: string): Promise<ExampleFile[]> {
 /** Load the root .env at repo root. */
 export async function loadRootEnv(root: string): Promise<Map<string, string> | null> {
     const path = join(root, '.env')
-    const f = Bun.file(path)
-    if (!(await f.exists())) return null
-    return parseEnv(await f.text())
+    if (!existsSync(path)) return null
+    return parseEnv(await readFile(path, 'utf8'))
 }
 
 export function relPath(root: string, p: string): string {

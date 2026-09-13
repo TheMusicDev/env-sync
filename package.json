@@ -20,15 +20,17 @@
         "cli"
     ],
     "files": [
-        "src",
+        "dist",
         "README.md",
         "LICENSE"
     ],
     "packageManager": "bun@1.3.14",
     "bin": {
-        "env-sync": "src/index.ts"
+        "env-sync": "dist/index.js"
     },
     "scripts": {
+        "build": "bun build src/index.ts --target=node --outfile=dist/index.js && node -e \"const fs=require('fs');let s=fs.readFileSync('dist/index.js','utf8').replace(/^#!.*\\n/,'');fs.writeFileSync('dist/index.js','#!/usr/bin/env node\\n'+s)\"",
+        "prepublishOnly": "bun test && bun run check:types && bun run build",
         "check:types": "tsc --noEmit",
         "test": "bun test"
     },

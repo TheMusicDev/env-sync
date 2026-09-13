@@ -1,4 +1,5 @@
 import { existsSync } from 'node:fs'
+import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { findExamples, loadRootEnv, relPath, type ExampleFile } from './lib'
 
@@ -50,7 +51,7 @@ export async function check(root: string): Promise<CheckResult> {
 
         const envPath = join(ex.dir, '.env')
         if (existsSync(envPath)) {
-            const current = await Bun.file(envPath).text()
+            const current = await readFile(envPath, 'utf8')
             const currentKeys = parseKeys(current)
             for (const k of currentKeys) {
                 if (!ex.body.has(k) && !seen.has(k)) {

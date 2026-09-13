@@ -8,7 +8,12 @@ Small tool, low ceremony.
 bun install
 bun test          # 8 tests, fast
 bunx tsc --noEmit # types
+bun run build     # node-compatible bundle into dist/ (bin target)
 ```
+
+Source runs on both Bun and Node (node:fs APIs only); the published `bin` is
+the `dist/` bundle built for Node. Dev-run without building:
+`bun src/index.ts check`.
 
 ## Rules
 

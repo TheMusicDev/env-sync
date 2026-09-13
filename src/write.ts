@@ -1,4 +1,5 @@
 import { existsSync } from 'node:fs'
+import { readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { findExamples, loadRootEnv, parseEnv, relPath } from './lib'
 
@@ -44,7 +45,7 @@ export async function write(root: string): Promise<WriteResult> {
 
         const envPath = join(ex.dir, '.env')
         const existing = existsSync(envPath)
-            ? parseEnv(await Bun.file(envPath).text())
+            ? parseEnv(await readFile(envPath, 'utf8'))
             : new Map<string, string>()
 
         const out: string[] = []
@@ -75,7 +76,7 @@ export async function write(root: string): Promise<WriteResult> {
             out.push(`${k}=${v}`)
         }
 
-        await Bun.write(envPath, out.join('\n') + '\n')
+        await writeFile(envPath, out.join('\n') + '\n', 'utf8')
         written.push({ path: relPath(root, envPath), added, updated, preservedExtras })
     }
 
