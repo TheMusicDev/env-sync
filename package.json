@@ -1,6 +1,6 @@
 {
     "name": "@themusicdev/env-sync",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Sync a monorepo root .env into per-app .env files declared by .env.example mapping headers",
     "type": "module",
     "license": "MIT",
