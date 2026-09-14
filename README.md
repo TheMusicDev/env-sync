@@ -37,7 +37,7 @@ Run from the monorepo root. Root files live at `./.env` and `./.env.example`.
 
 ```sh
 bun add github:TheMusicDev/env-sync   # from GitHub
-bun add @themusicdev/env-sync         # from npm (once published)
+bun add @themusicdev/env-sync         # from npm
 bun link @themusicdev/env-sync        # local dev, after `bun link` in this dir
 ```
 
